@@ -34,6 +34,14 @@ def main(inpath):
     outdeptharraypath=os.path.dirname(filepath)+'depthnpy/'+fname+'.npy'
     outsegmaskpath=os.path.dirname(filepath)+'segmask/'+fname+'.png'
 
+    # create subfolders for output data
+    subfolders = ['depth', 'depthnpy', 'segmask']
+    for subfolder in subfolders:
+        try:
+            os.mkdir(subfolder)
+        except:
+            pass # skip if subfolder already exists
+
     # load properties
     ## mesh
     mesh = o3d.io.read_triangle_mesh(inpath)
