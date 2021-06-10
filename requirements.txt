@@ -45,7 +45,6 @@ nest-asyncio==1.5.1
 notebook==6.4.0
 numpy==1.20.3
 open3d==0.13.0
-opencv-python==4.5.2.54
 packaging==20.9
 pandas==1.2.4
 pandocfilters==1.4.3
@@ -60,6 +59,7 @@ ptyprocess==0.7.0
 pycparser==2.20
 Pygments==2.9.0
 pyparsing==2.4.7
+pypng==0.0.20
 pyrsistent==0.17.3
 python-dateutil==2.8.1
 pytz==2021.1
@@ -81,5 +81,5 @@ traitlets==5.0.5
 urllib3==1.26.5
 wcwidth==0.2.5
 webencodings==0.5.1
-websocket-client==1.0.1
+websocket-client==1.1.0
 widgetsnbextension==3.5.1

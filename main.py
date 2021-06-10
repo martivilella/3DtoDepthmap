@@ -2,7 +2,7 @@ import open3d as o3d
 import numpy as np
 import os
 import sys
-import cv2 as cv
+import png
 
 def create_visualiser(mesh, camera_parameters):
     '''
@@ -66,10 +66,10 @@ def main(inpath):
     np.save(outdeptharraypath, deptharray)
 
     ## png depth map
-    cv.imwrite(outdepthpath,np.round(deptharray*1000).astype(np.uint16))
+    png.from_array(depth2darray.astype(np.uint8), mode="L").save(outdepthpath)
 
     ## png segmask
-    cv.imwrite(outsegmaskpath, deptharray.astype(bool)*255)
+    png.from_array((depth2darray.astype(bool)*255).astype(np.uint8), mode="L").save(outsegmaskpath)
     
     ## intrinsic camera params
     write_intr_file("virtualcam.intr", cam_params.intrinsic)
