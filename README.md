@@ -9,8 +9,8 @@ It provides:
 There are numerous standards used to express depth data, so the code is designed to be modular and easy to edit for custom implementations
 
 Sample outputs for a small [frog object](https://www.thingiverse.com/thing:4838220):
-Depth map | Segmentation mask
-- | -
+Depth map | Seg mask
+--|--
 ![Depth map of a small frog object, scaling=5000.0](assets/frog_depthmap.png) | ![Segmentation mask of the same object](assets/frog_segmask.png)
 
 # Getting started
