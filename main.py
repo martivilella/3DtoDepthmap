@@ -65,8 +65,10 @@ def main(inpath, s=1000.0):
     
     # create open3d visualiser
     vis = create_visualiser(mesh, cam_params)
-    #vis.run()
-    #vis.destroy_window()
+
+    # run visualiser to freely move camera
+    # ! Comment out if you want depth image to be taken using the provided extrinsic transformation "extr"
+    vis.run()
 
     # capture depth img
     depth = vis.capture_depth_float_buffer(True) # Depth in mm
