@@ -71,8 +71,8 @@ def main(inpath, s=1000.0):
     vis.run()
 
     # capture depth img
-    depth = vis.capture_depth_float_buffer(True) # Depth in mm
-    depth2darray = np.asarray(depth)/1000.0 # Depth in m
+    depth = vis.capture_depth_float_buffer(True)
+    depth2darray = np.asarray(depth) # Depth in m
     depthsize = np.shape(depth2darray)
     depth3darray = np.reshape(depth2darray, (depthsize[0], depthsize[1], 1)) # reshape to 3D array
     print(f"Depth map stats: \n max: {np.max(depth2darray):f}\tm\n min: {np.min(depth2darray[depth2darray.astype(bool)]):.5f}\tm") # apply mask to min calculation, background has value of 0
