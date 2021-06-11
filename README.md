@@ -1,8 +1,8 @@
 # Description
 The goal of this utility is to provide a simple way to generate depth maps (Z-Buffers) from 3D models, to be used as synthetic inputs for neural networks and other relevant tasks.
 It provides:
-- Depth map in [mm] as a 3D ```npy``` file;
-- Depth map in ```png``` format, with 255RGB corresponding to 255mm depth; 
+- Depth map in [m] as a 3D ```npy``` file;
+- Depth map in ```png``` format with a user-defined scaling factor (default = 1000.0), so that 255RGB corresponds to 255[mm] depth; 
 - Segmentation mask in ```png``` format;
 - Intrinsic camera parameters in format used in the CQCNN package by [Berkeley Automation](https://github.com/berkeleyautomation)
 

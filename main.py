@@ -34,7 +34,7 @@ def write_intr_file(filename, intr_params):
     intr_file.write(f'{{"_cy": {cxy[1]:f}, "_cx": {cxy[0]:f}, "_fy": {fxy[1]:f}, "_height": {intr_params.height}, "_fx": {fxy[1]:f}, "_width": {intr_params.width}, "_skew": {intr_params.get_skew():f}, "_K": {0}, "_frame": "{fname}"}}') # no distortion
     intr_file.close()
     
-def main(inpath):
+def main(inpath, s=1000.0):
     # set in/out paths
     filepath,fullflname = os.path.split(inpath)
     fname,ext = os.path.splitext(fullflname)
@@ -69,18 +69,18 @@ def main(inpath):
     #vis.destroy_window()
 
     # capture depth img
-    depth = vis.capture_depth_float_buffer(True)
-    depth2darray = np.asarray(depth) # Depth in mm
+    depth = vis.capture_depth_float_buffer(True) # Depth in mm
+    depth2darray = np.asarray(depth)/1000.0 # Depth in m
     depthsize = np.shape(depth2darray)
     depth3darray = np.reshape(depth2darray, (depthsize[0], depthsize[1], 1)) # reshape to 3D array
-    print(f"Depth map stats: \n max: {np.max(depth2darray):f}\tmm\n min: {np.min(depth2darray[depth2darray.astype(bool)]):.5f}\tmm") # apply mask to min calculation, background has value of 0
+    print(f"Depth map stats: \n max: {np.max(depth2darray):f}\tm\n min: {np.min(depth2darray[depth2darray.astype(bool)]):.5f}\tm") # apply mask to min calculation, background has value of 0
     
     # save outputs
     ## npy depth array
     np.save(outdeptharraypath, depth3darray)
 
     ## png depth map
-    png.from_array(depth2darray.astype(np.uint8), mode="L").save(outdepthpath)
+    png.from_array((depth2darray*s).astype(np.uint8), mode="L").save(outdepthpath)
 
     ## png segmask
     png.from_array((depth2darray.astype(bool)*255).astype(np.uint8), mode="L").save(outsegmaskpath)
@@ -89,7 +89,12 @@ def main(inpath):
     write_intr_file("virtualcam.intr", cam_params.intrinsic)
 
 if __name__ == "__main__":
-    if (len(sys.argv) != 2):
-        print("Provide exactly one CLI arg as the relative path to the 3D model to load\n")
-    else:
+    if (sys.argv[1] == '--help' or sys.argv[1] == '-h'):
+        print("Usage:\n main.py <3dmodel_path> [<depthmap_scale>]")
+    elif (len(sys.argv) < 2):
+        print("Provide at least one CLI arg as the relative path to the 3D model to load\n")
+    elif (len(sys.argv) == 2):
         main(sys.argv[1])
+    #elif (len(sys.argv) == 3):
+    else:
+        main(sys.argv[1], sys.argv[2])
