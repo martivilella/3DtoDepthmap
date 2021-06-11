@@ -17,9 +17,9 @@ To set up the project:
 
 
 # Usage
-Run ```main.py``` with 1 arg providing the relative path to the 3D model file:
+Run ```main.py``` with 1 arg providing the relative path to the 3D model file. A 2nd arg that is the depth png image scaling factor can also be provided: 
 ```
-python3 main.py <3dmodel.obj>
+python3 main.py <3dmodel.obj> [depthPNG_scaling{=1000.0}]
 ```
 
 If using a Python virtual environment, don't forget to activate it by sourcing from the terminal: 
