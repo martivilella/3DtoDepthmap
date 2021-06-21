@@ -56,12 +56,15 @@ def main(inpath, s=1000.0):
     mesh.compute_vertex_normals()
     
     ## camera params
-    w=1000
-    h=1000
-    f=3000
+    # current params correspond to phoxi camera by UC Berkeley
+    w=516
+    h=386
+    f=552.5
+    cx=255.5
+    cy=191.75
     extr = np.identity(4,dtype=np.float64)
     extr[2,3] = 100
-    cam_params = create_camera(w, h, f, f, w/2.0-0.5, h/2.0-0.5, extr)
+    cam_params = create_camera(w, h, f, f, cx, cy, extr)
     
     # create open3d visualiser
     vis = create_visualiser(mesh, cam_params)
