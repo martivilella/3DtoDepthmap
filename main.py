@@ -82,7 +82,7 @@ def main(inpath, s=1000.0):
     np.save(outdeptharraypath, depth3darray)
 
     ## png depth map
-    png.from_array((depth2darray*float(s)).astype(np.uint8), mode="L").save(outdepthpath)
+    png.from_array(np.clip(depth2darray*float(s), 0, 255).astype(np.uint8), mode="L").save(outdepthpath)
 
     ## png segmask
     png.from_array(np.clip(depth2darray.astype(bool)*255, 0, 255).astype(np.uint8), mode="L").save(outsegmaskpath)
